@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart' as unistroke;
 import 'package:ttr/assets_manager.dart';
+import 'package:ttr/enemy.dart';
 import 'package:ttr/spell_painter.dart';
 import 'package:ttr/spells.dart';
 
@@ -58,9 +59,14 @@ class _GamePageState extends State<GamePage> {
             print(spell);
           });
         },
-        child: CustomPaint(
-          size: Size.infinite,
-          painter: SpellPainter(_points),
+        child: Stack(
+          children: [
+            Enemy(),
+            CustomPaint(
+              size: Size.infinite,
+              painter: SpellPainter(_points),
+            ),
+          ],
         ),
       ),
     );
