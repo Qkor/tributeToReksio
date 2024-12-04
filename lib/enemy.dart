@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:ttr/spell_manager.dart';
+import 'audio_manager.dart';
 
 class Enemy extends StatefulWidget{
   @override
@@ -44,6 +44,7 @@ class _EnemyState extends State<Enemy> {
   _hit(){
     setState(() {
       if(hitCount<3 && SpellManager.spell != null){
+        AudioManager.playSpellCasted();
         SpellManager.spell = null;
         hitCount++;
         _image = Image.asset('assets/hen$hitCount.png', width: enemySize);

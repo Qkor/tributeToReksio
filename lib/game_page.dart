@@ -1,7 +1,7 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart' as unistroke;
 import 'package:ttr/assets_manager.dart';
+import 'package:ttr/audio_manager.dart';
 import 'package:ttr/enemy.dart';
 import 'package:ttr/spell_manager.dart';
 import 'package:ttr/spell_painter.dart';
@@ -16,7 +16,6 @@ class _GamePageState extends State<GamePage> {
 
   final List<Offset> _points = [];
   bool ready = false;
-  final audioPlayer = AudioPlayer();
 
   _loadAssets() async {
     await AssetsManager.loadAssets();
@@ -26,8 +25,7 @@ class _GamePageState extends State<GamePage> {
   }
 
   _setupAudioPlayer() async {
-    await audioPlayer.setReleaseMode(ReleaseMode.loop);
-    audioPlayer.play(AssetSource('pojedynek.wav'));
+    await AudioManager.setup();
   }
 
   @override
@@ -52,11 +50,16 @@ class _GamePageState extends State<GamePage> {
             _points.add(localPosition);
           });
         },
+        onPanStart: (_){
+          AudioManager.playSpellCasting();
+        },
         onPanEnd: (_) {
+          AudioManager.stopSpellCasting();
           final recognized = unistroke.recognizeCustomUnistroke(_points);
           if (recognized != null && recognized.score>0.85) {
             print('Stroke recognized as ${recognized.name} with score ${recognized.score}');
             SpellManager.spell = recognized.name;
+            AudioManager.playSpellRecognized();
           } else{
             SpellManager.spell = null;
           }
