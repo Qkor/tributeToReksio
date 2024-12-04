@@ -61,11 +61,11 @@ class _GamePageState extends State<GamePage> {
         },
         child: Stack(
           children: [
-            Enemy(),
             CustomPaint(
               size: Size.infinite,
               painter: SpellPainter(_points),
             ),
+            Enemy(),
           ],
         ),
       ),

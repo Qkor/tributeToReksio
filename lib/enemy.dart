@@ -43,7 +43,9 @@ class _EnemyState extends State<Enemy> {
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
       child: GestureDetector(
-        onTap: (){},
+        onTap: (){
+          print('hit');
+        },
         child: Image.asset('assets/goose.png', width: gooseSize),
       ),
     );
