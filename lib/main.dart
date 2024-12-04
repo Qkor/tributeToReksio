@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart' as unistroke;
+import 'package:ttr/spells.dart';
+import 'game_page.dart';
 
 void main() {
+  unistroke.referenceUnistrokes = spells;
   runApp(const MyApp());
 }
 
@@ -17,16 +21,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class GamePage extends StatefulWidget {
-  const GamePage({super.key});
-  @override
-  State<GamePage> createState() => _GamePageState();
-}
 
-class _GamePageState extends State<GamePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
-  }
-}
