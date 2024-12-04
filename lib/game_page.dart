@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart' as unistroke;
 import 'package:ttr/assets_manager.dart';
 import 'package:ttr/enemy.dart';
+import 'package:ttr/spell_manager.dart';
 import 'package:ttr/spell_painter.dart';
 import 'package:ttr/spells.dart';
 
@@ -50,7 +51,7 @@ class _GamePageState extends State<GamePage> {
           final recognized = unistroke.recognizeCustomUnistroke(_points);
           if (recognized != null && recognized.score>0.85) {
             print('Stroke recognized as ${recognized.name} with score ${recognized.score}');
-            spell = recognized.name;
+            SpellManager.spell = recognized.name;
           } else{
             spell = null;
           }
