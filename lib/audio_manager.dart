@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:audioplayers/audioplayers.dart';
 
 class AudioManager{
@@ -27,5 +29,14 @@ class AudioManager{
 
   static playSpellCasted(){
     AudioManager.sfxPlayer.play(AssetSource('czarStrzR.wav'));
+  }
+
+  static playHenDefeated(){
+    AudioManager.sfxPlayer.play(AssetSource('henDefeat.wav'));
+  }
+
+  static playHenSound(){
+    var rand = Random().nextInt(3)+1;
+    AudioManager.sfxPlayer.play(AssetSource('hen$rand.wav'));
   }
 }

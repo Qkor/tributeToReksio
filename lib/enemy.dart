@@ -12,8 +12,8 @@ class Enemy extends StatefulWidget{
 class _EnemyState extends State<Enemy> {
   final double enemySize = 200;
   Timer? _timer;
-  double _top = 0;
-  double _left = 0;
+  double _top = 200;
+  double _left = 100;
   double screenHeight = 0;
   double screenWidth = 0;
   Image? _image;
@@ -28,10 +28,17 @@ class _EnemyState extends State<Enemy> {
     }
   }
 
+  _die(){
+    AudioManager.playHenDefeated();
+    setState(() {
+      _top = MediaQuery.of(context).size.height + enemySize;
+    });
+  }
+
   @override
   void initState() {
     _image = Image.asset('assets/hen.png', width: enemySize);
-    _timer = Timer.periodic(const Duration(milliseconds: 500), (_)=>_move());
+    _timer = Timer.periodic(const Duration(milliseconds: 300), (_)=>_move());
     super.initState();
   }
 
@@ -42,12 +49,16 @@ class _EnemyState extends State<Enemy> {
   }
 
   _hit(){
+    AudioManager.playHenSound();
     setState(() {
       if(hitCount<3 && SpellManager.spell != null){
         AudioManager.playSpellCasted();
         SpellManager.spell = null;
         hitCount++;
         _image = Image.asset('assets/hen$hitCount.png', width: enemySize);
+        if(hitCount==3){
+          _die();
+        }
       }
     });
   }

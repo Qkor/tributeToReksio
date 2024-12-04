@@ -67,6 +67,12 @@ class _GamePageState extends State<GamePage> {
             _points.clear();
           });
         },
+        onTap: (){
+          if(SpellManager.spell != null){
+            AudioManager.playSpellCasted();
+            SpellManager.spell = null;
+          }
+        },
         child: Stack(
           children: [
             Image.asset(
