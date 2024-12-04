@@ -9,22 +9,27 @@ class Enemy extends StatefulWidget{
 }
 
 class _EnemyState extends State<Enemy> {
-  final double gooseSize = 200;
+  final double enemySize = 200;
   Timer? _timer;
   double _top = 0;
   double _left = 0;
   double screenHeight = 0;
   double screenWidth = 0;
+  Image? _image;
+  int hitCount = 0;
 
   _move(){
-    setState(() {
-      _top = Random().nextDouble() * (MediaQuery.of(context).size.height - gooseSize);
-      _left = Random().nextDouble() * (MediaQuery.of(context).size.width - gooseSize);
-    });
+    if(hitCount<3){
+      setState(() {
+        _top = Random().nextDouble() * (MediaQuery.of(context).size.height - enemySize);
+        _left = Random().nextDouble() * (MediaQuery.of(context).size.width - enemySize);
+      });
+    }
   }
 
   @override
   void initState() {
+    _image = Image.asset('assets/hen.png', width: enemySize);
     _timer = Timer.periodic(const Duration(milliseconds: 500), (_)=>_move());
     super.initState();
   }
@@ -35,6 +40,15 @@ class _EnemyState extends State<Enemy> {
     super.dispose();
   }
 
+  _hit(){
+    setState(() {
+      if(hitCount<3){
+        hitCount++;
+        _image = Image.asset('assets/hen$hitCount.png', width: enemySize);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
@@ -43,10 +57,8 @@ class _EnemyState extends State<Enemy> {
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
       child: GestureDetector(
-        onTap: (){
-          print('hit');
-        },
-        child: Image.asset('assets/goose.png', width: gooseSize),
+        onTap: _hit,
+        child: _image,
       ),
     );
   }
