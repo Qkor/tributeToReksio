@@ -5,6 +5,7 @@ import 'package:audioplayers/audioplayers.dart';
 class AudioManager{
   static AudioPlayer audioPlayer = AudioPlayer();
   static AudioPlayer sfxPlayer = AudioPlayer();
+  static AudioPlayer henPlayer = AudioPlayer();
   static AudioPlayer magicPlayer = AudioPlayer();
 
   static setup() async{
@@ -32,11 +33,11 @@ class AudioManager{
   }
 
   static playHenDefeated(){
-    AudioManager.sfxPlayer.play(AssetSource('henDefeat.wav'));
+    AudioManager.henPlayer.play(AssetSource('henDefeat.wav'));
   }
 
   static playHenSound(){
     var rand = Random().nextInt(3)+1;
-    AudioManager.sfxPlayer.play(AssetSource('hen$rand.wav'));
+    AudioManager.henPlayer.play(AssetSource('hen$rand.wav'));
   }
 }

@@ -31,14 +31,14 @@ class _EnemyState extends State<Enemy> {
   _die(){
     AudioManager.playHenDefeated();
     setState(() {
-      _top = MediaQuery.of(context).size.height + enemySize;
+      _top = MediaQuery.of(context).size.height + enemySize * 4;
     });
   }
 
   @override
   void initState() {
     _image = Image.asset('assets/hen.png', width: enemySize);
-    _timer = Timer.periodic(const Duration(milliseconds: 300), (_)=>_move());
+    _timer = Timer.periodic(const Duration(milliseconds: 400), (_)=>_move());
     super.initState();
   }
 
@@ -68,7 +68,7 @@ class _EnemyState extends State<Enemy> {
     return AnimatedPositioned(
       top: _top,
       left: _left,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 400),
       curve: Curves.easeInOut,
       child: GestureDetector(
         onTap: _hit,
