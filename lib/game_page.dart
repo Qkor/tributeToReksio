@@ -85,11 +85,25 @@ class _GamePageState extends State<GamePage> {
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
             ),
-            CustomPaint(
-              size: Size.infinite,
-              painter: SpellPainter(_points),
-            ),
             Enemy(),
+            IgnorePointer(
+              child: Center(
+                child: Image.asset(
+                  "assets/darkness.gif",
+                  height: MediaQuery.of(context).size.height * SpellManager.playerHit
+                      * (MediaQuery.of(context).orientation == Orientation.portrait ? 0.5 : 1),
+                  width: MediaQuery.of(context).size.width * SpellManager.playerHit
+                      * (MediaQuery.of(context).orientation == Orientation.portrait ? 1 : 0.5),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            IgnorePointer(
+              child: CustomPaint(
+                size: Size.infinite,
+                painter: SpellPainter(_points),
+              ),
+            ),
           ],
         ),
       ),
