@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart' as unistroke;
 import 'package:ttr/assets_manager.dart';
 import 'package:ttr/audio_manager.dart';
@@ -33,6 +34,9 @@ class _GamePageState extends State<GamePage> {
     super.initState();
     _loadAssets();
     _setupAudioPlayer();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+      SystemUiOverlay.bottom
+    ]);
   }
 
   @override
