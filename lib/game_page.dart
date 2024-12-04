@@ -69,6 +69,12 @@ class _GamePageState extends State<GamePage> {
         },
         child: Stack(
           children: [
+            Image.asset(
+              "assets/mury.png",
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
+            ),
             CustomPaint(
               size: Size.infinite,
               painter: SpellPainter(_points),
