@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:ttr/assets_manager.dart';
 
 class SpellPainter extends CustomPainter {
   final List<Offset> points;
-
+  static const double starSize = 50;
   SpellPainter(this.points);
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..color = Colors.blue
-      ..strokeCap = StrokeCap.round
-      ..strokeWidth = 4.0;
-
-    for (int i = 0; i < points.length - 1; i++) {
-      if (points[i] != Offset.zero && points[i + 1] != Offset.zero) {
-        canvas.drawLine(points[i], points[i + 1], paint);
+    final Paint paint = Paint();
+    Rect srcRect = Rect.fromLTWH(0, 0,AssetsManager.star!.width.toDouble(),AssetsManager.star!.height.toDouble());
+    for(int i=0;i<points.length;i++){
+      if(i%3==0){
+        Rect destRect = Rect.fromLTWH(points[i].dx,points[i].dy,starSize,starSize);
+        canvas.drawImageRect(AssetsManager.star!, srcRect, destRect, paint);
       }
     }
   }

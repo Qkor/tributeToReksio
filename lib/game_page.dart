@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart' as unistroke;
+import 'package:ttr/assets_manager.dart';
 import 'package:ttr/spell_painter.dart';
 
 class GamePage extends StatefulWidget {
@@ -11,9 +12,28 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
 
   final List<Offset> _points = [];
+  bool ready = false;
+
+  _loadAssets() async {
+    await AssetsManager.loadAssets();
+    setState(() {
+      ready = true;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAssets();
+  }
 
   @override
   Widget build(BuildContext context) {
+
+    if(!ready){
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
     return Scaffold(
       body: GestureDetector(
         onPanUpdate: (details) {
