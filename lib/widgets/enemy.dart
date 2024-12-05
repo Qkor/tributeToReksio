@@ -41,6 +41,12 @@ class _EnemyState extends State<Enemy> {
       _top = MediaQuery.of(context).size.height + size * 4;
     });
     widget.rebuildParent(()=>SpellManager.reset());
+    _timer = Timer(const Duration(seconds: 2), (){
+      AudioManager.playVictory();
+      if(context.mounted){
+        Navigator.of(context).pop();
+      }
+    });
   }
 
   @override
@@ -79,6 +85,16 @@ class _EnemyState extends State<Enemy> {
   _castSpell(){
     AudioManager.playEnemySpellCasted();
     widget.rebuildParent(()=>SpellManager.getHit());
+    if(SpellManager.playerHit>=3){
+      _timer?.cancel();
+      _spellTimer?.cancel();
+      _timer = Timer(const Duration(seconds: 1), (){
+        AudioManager.playDefeat();
+        if(context.mounted){
+          Navigator.of(context).pop();
+        }
+      });
+    }
   }
 
   @override

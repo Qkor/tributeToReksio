@@ -12,6 +12,7 @@ class AudioManager{
     audioPlayer.setReleaseMode(ReleaseMode.loop);
     magicPlayer.setReleaseMode(ReleaseMode.loop);
     sfxPlayer.setPlayerMode(PlayerMode.lowLatency);
+    henPlayer.setPlayerMode(PlayerMode.lowLatency);
   }
 
   static playDuelMusic(){
@@ -49,5 +50,13 @@ class AudioManager{
   static playHenSound(){
     var rand = Random().nextInt(3)+1;
     AudioManager.henPlayer.play(AssetSource('wavs/hen$rand.wav'));
+  }
+
+  static playDefeat(){
+    AudioManager.sfxPlayer.play(AssetSource('wavs/defeat.wav'));
+  }
+
+  static playVictory(){
+    AudioManager.sfxPlayer.play(AssetSource('wavs/victory.wav'));
   }
 }
