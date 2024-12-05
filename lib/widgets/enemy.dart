@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:ttr/spell_manager.dart';
-import 'audio_manager.dart';
+import 'package:ttr/managers/spell_manager.dart';
+import 'package:ttr/managers/audio_manager.dart';
 
 class Enemy extends StatefulWidget{
   final Function rebuildParent;
@@ -43,7 +43,7 @@ class _EnemyState extends State<Enemy> {
 
   @override
   void initState() {
-    _image = Image.asset('assets/hen.png', width: enemySize);
+    _image = Image.asset('assets/images/hen.png', width: enemySize);
     _timer = Timer.periodic(const Duration(milliseconds: 400), (_)=>_move());
     _spellTimer = Timer.periodic(const Duration(seconds: 10), (_)=>_castSpell());
     super.initState();
@@ -63,7 +63,7 @@ class _EnemyState extends State<Enemy> {
         AudioManager.playSpellCasted();
         SpellManager.spell = null;
         hitCount++;
-        _image = Image.asset('assets/hen$hitCount.png', width: enemySize);
+        _image = Image.asset('assets/images/hen$hitCount.png', width: enemySize);
         if(hitCount==3){
           _die();
         }

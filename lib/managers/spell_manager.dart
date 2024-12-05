@@ -1,4 +1,4 @@
-import 'package:ttr/spells.dart';
+import 'package:ttr/managers/spells.dart';
 
 class SpellManager {
   static Spell? spell;

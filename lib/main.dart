@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart' as unistroke;
-import 'package:ttr/spells.dart';
-import 'game_page.dart';
+import 'package:ttr/managers/spells.dart';
+import 'widgets/game_page.dart';
 
 void main() {
   unistroke.referenceUnistrokes = spells;

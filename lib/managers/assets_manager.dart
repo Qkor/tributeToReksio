@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 class AssetsManager{
   static loadAssets() async {
-    star = await _loadImageFromAssets('assets/star.png');
+    star = await _loadImageFromAssets('assets/images/star.png');
   }
 
   static Future<ui.Image> _loadImageFromAssets(String path) async {

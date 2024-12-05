@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ttr/assets_manager.dart';
+import 'package:ttr/managers/assets_manager.dart';
 
 class SpellPainter extends CustomPainter {
   final List<Offset> points;
