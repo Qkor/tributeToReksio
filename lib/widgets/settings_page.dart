@@ -61,7 +61,7 @@ class _SettingsPageState extends State<SettingsPage> {
               const SizedBox(height: 20),
               const Text('Ustawienia:', style: TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 20),
-              const Text('Czułość, czyli jak dokładny musi być narysowany czar?'),
+              const Text('Czułość, czyli jak dokładnie musi być narysowany czar?'),
               Slider(
                 value: SpellManager.spellSensitivity,
                 min: 0.5,
