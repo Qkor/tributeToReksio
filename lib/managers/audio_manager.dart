@@ -4,15 +4,11 @@ import 'package:audioplayers/audioplayers.dart';
 
 class AudioManager{
   static AudioPlayer audioPlayer = AudioPlayer();
-  static AudioPlayer sfxPlayer = AudioPlayer();
-  static AudioPlayer henPlayer = AudioPlayer();
   static AudioPlayer magicPlayer = AudioPlayer();
 
   static setup() async{
     audioPlayer.setReleaseMode(ReleaseMode.loop);
     magicPlayer.setReleaseMode(ReleaseMode.loop);
-    sfxPlayer.setPlayerMode(PlayerMode.lowLatency);
-    henPlayer.setPlayerMode(PlayerMode.lowLatency);
   }
 
   static playDuelMusic(){
@@ -24,7 +20,7 @@ class AudioManager{
   }
 
   static playSpellRecognized(){
-    AudioManager.sfxPlayer.play(AssetSource('wavs/CzarRR.wav'));
+    AudioPlayer().play(AssetSource('wavs/CzarRR.wav'));
   }
 
   static playSpellCasting(){
@@ -36,27 +32,27 @@ class AudioManager{
   }
 
   static playSpellCasted(){
-    AudioManager.sfxPlayer.play(AssetSource('wavs/czarStrzR.wav'));
+    AudioPlayer().play(AssetSource('wavs/czarStrzR.wav'));
   }
 
   static playEnemySpellCasted(){
-    AudioManager.henPlayer.play(AssetSource('wavs/czarStrzW.wav'));
+    AudioPlayer().play(AssetSource('wavs/czarStrzW.wav'));
   }
 
   static playHenDefeated(){
-    AudioManager.henPlayer.play(AssetSource('wavs/henDefeat.wav'));
+    AudioPlayer().play(AssetSource('wavs/henDefeat.wav'));
   }
 
   static playHenSound(){
     var rand = Random().nextInt(3)+1;
-    AudioManager.henPlayer.play(AssetSource('wavs/hen$rand.wav'));
+    AudioPlayer().play(AssetSource('wavs/hen$rand.wav'));
   }
 
   static playDefeat(){
-    AudioManager.sfxPlayer.play(AssetSource('wavs/defeat.wav'));
+    AudioPlayer().play(AssetSource('wavs/defeat.wav'));
   }
 
   static playVictory(){
-    AudioManager.sfxPlayer.play(AssetSource('wavs/victory.wav'));
+    AudioPlayer().play(AssetSource('wavs/victory.wav'));
   }
 }

@@ -88,12 +88,10 @@ class _EnemyState extends State<Enemy> {
     if(SpellManager.playerHit>=3){
       _timer?.cancel();
       _spellTimer?.cancel();
-      _timer = Timer(const Duration(seconds: 1), (){
-        AudioManager.playDefeat();
-        if(context.mounted){
-          Navigator.of(context).pop();
-        }
-      });
+      AudioManager.playDefeat();
+      if(context.mounted){
+        Navigator.of(context).pop();
+      }
     }
   }
 
