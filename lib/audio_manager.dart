@@ -32,6 +32,10 @@ class AudioManager{
     AudioManager.sfxPlayer.play(AssetSource('czarStrzR.wav'));
   }
 
+  static playEnemySpellCasted(){
+    AudioManager.henPlayer.play(AssetSource('czarStrzW.wav'));
+  }
+
   static playHenDefeated(){
     AudioManager.henPlayer.play(AssetSource('henDefeat.wav'));
   }

@@ -5,6 +5,8 @@ import 'package:ttr/spell_manager.dart';
 import 'audio_manager.dart';
 
 class Enemy extends StatefulWidget{
+  final Function rebuildParent;
+  const Enemy({super.key, required this.rebuildParent});
   @override
   State<Enemy> createState() => _EnemyState();
 }
@@ -12,6 +14,7 @@ class Enemy extends StatefulWidget{
 class _EnemyState extends State<Enemy> {
   final double enemySize = 200;
   Timer? _timer;
+  Timer? _spellTimer;
   double _top = 200;
   double _left = 100;
   double screenHeight = 0;
@@ -29,6 +32,8 @@ class _EnemyState extends State<Enemy> {
   }
 
   _die(){
+    _timer?.cancel();
+    _spellTimer?.cancel();
     AudioManager.playHenDefeated();
     setState(() {
       _top = MediaQuery.of(context).size.height + enemySize * 4;
@@ -39,12 +44,14 @@ class _EnemyState extends State<Enemy> {
   void initState() {
     _image = Image.asset('assets/hen.png', width: enemySize);
     _timer = Timer.periodic(const Duration(milliseconds: 400), (_)=>_move());
+    _spellTimer = Timer.periodic(const Duration(seconds: 10), (_)=>_castSpell());
     super.initState();
   }
 
   @override
   void dispose() {
     _timer?.cancel();
+    _spellTimer?.cancel();
     super.dispose();
   }
 
@@ -61,6 +68,11 @@ class _EnemyState extends State<Enemy> {
         }
       }
     });
+  }
+
+  _castSpell(){
+    AudioManager.playEnemySpellCasted();
+    widget.rebuildParent(()=>SpellManager.getHit());
   }
 
   @override

@@ -39,6 +39,14 @@ class _GamePageState extends State<GamePage> {
     ]);
   }
 
+  _rebuild(Function? callback){
+    setState(() {
+      if(callback != null){
+        callback();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     if(!ready){
@@ -85,7 +93,7 @@ class _GamePageState extends State<GamePage> {
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
             ),
-            Enemy(),
+            Enemy(rebuildParent: _rebuild),
             IgnorePointer(
               child: Center(
                 child: Image.asset(
