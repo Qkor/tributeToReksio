@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart' as unistroke;
-import 'package:ttr/managers/assets_manager.dart';
 import 'package:ttr/managers/audio_manager.dart';
 import 'package:ttr/widgets/enemy.dart';
 import 'package:ttr/managers/spell_manager.dart';
@@ -17,28 +15,6 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
 
   final List<Offset> _points = [];
-  bool ready = false;
-
-  _loadAssets() async {
-    await AssetsManager.loadAssets();
-    setState(() {
-      ready = true;
-    });
-  }
-
-  _setupAudioPlayer() async {
-    await AudioManager.setup();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _loadAssets();
-    _setupAudioPlayer();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
-      SystemUiOverlay.bottom
-    ]);
-  }
 
   _rebuild(Function? callback){
     setState(() {
@@ -49,11 +25,20 @@ class _GamePageState extends State<GamePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    if(!ready){
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
-    }
+  void initState() {
+    super.initState();
+    AudioManager.playDuelMusic();
+    SpellManager.reset();
+  }
 
+  @override
+  void dispose() {
+    super.dispose();
+    AudioManager.playIdleMusic();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
         onPanUpdate: (details) {

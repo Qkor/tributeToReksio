@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart' as unistroke;
 import 'package:ttr/managers/spells.dart';
-import 'widgets/game_page.dart';
+import 'package:ttr/widgets/settings_page.dart';
 
 void main() {
   unistroke.referenceUnistrokes = spells;
@@ -13,10 +13,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Tribute to Reksio',
-      theme: ThemeData.dark(),
-      home: const GamePage(),
+      home: SettingsPage(),
     );
   }
 }

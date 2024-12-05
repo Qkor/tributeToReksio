@@ -11,9 +11,15 @@ class AudioManager{
   static setup() async{
     audioPlayer.setReleaseMode(ReleaseMode.loop);
     magicPlayer.setReleaseMode(ReleaseMode.loop);
-    audioPlayer.play(AssetSource('wavs/pojedynek.wav'));
-
     sfxPlayer.setPlayerMode(PlayerMode.lowLatency);
+  }
+
+  static playDuelMusic(){
+    audioPlayer.play(AssetSource('wavs/pojedynek.wav'));
+  }
+
+  static playIdleMusic(){
+    audioPlayer.play(AssetSource('wavs/intro.wav'));
   }
 
   static playSpellRecognized(){
