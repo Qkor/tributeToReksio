@@ -7,4 +7,8 @@ class SpellManager {
   static getHit(){
     playerHit++;
   }
+  static reset(){
+    spell = null;
+    playerHit = 0;
+  }
 }

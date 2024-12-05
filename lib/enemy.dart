@@ -38,6 +38,7 @@ class _EnemyState extends State<Enemy> {
     setState(() {
       _top = MediaQuery.of(context).size.height + enemySize * 4;
     });
+    widget.rebuildParent(()=>SpellManager.reset());
   }
 
   @override
