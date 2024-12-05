@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart' as unistroke;
 import 'package:ttr/managers/audio_manager.dart';
@@ -54,10 +53,7 @@ class _GamePageState extends State<GamePage> {
         onPanEnd: (_) {
           AudioManager.stopSpellCasting();
           final recognized = unistroke.recognizeCustomUnistroke(_points);
-          if (recognized != null && recognized.score>0.85) {
-            if (kDebugMode) {
-              print('Stroke recognized as ${recognized.name} with score ${recognized.score}');
-            }
+          if (recognized != null && recognized.score>SpellManager.spellSensitivity) {
             SpellManager.spell = recognized.name;
             AudioManager.playSpellRecognized();
           } else{

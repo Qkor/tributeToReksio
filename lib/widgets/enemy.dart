@@ -12,9 +12,11 @@ class Enemy extends StatefulWidget{
 }
 
 class _EnemyState extends State<Enemy> {
-  final double enemySize = 200;
   Timer? _timer;
   Timer? _spellTimer;
+  double size = 200;
+  int moveFrequency = 400;
+  int spellFrequency = 10;
   double _top = 200;
   double _left = 100;
   double screenHeight = 0;
@@ -25,8 +27,8 @@ class _EnemyState extends State<Enemy> {
   _move(){
     if(hitCount<3){
       setState(() {
-        _top = Random().nextDouble() * (MediaQuery.of(context).size.height - enemySize);
-        _left = Random().nextDouble() * (MediaQuery.of(context).size.width - enemySize);
+        _top = Random().nextDouble() * (MediaQuery.of(context).size.height - size);
+        _left = Random().nextDouble() * (MediaQuery.of(context).size.width - size);
       });
     }
   }
@@ -36,16 +38,19 @@ class _EnemyState extends State<Enemy> {
     _spellTimer?.cancel();
     AudioManager.playHenDefeated();
     setState(() {
-      _top = MediaQuery.of(context).size.height + enemySize * 4;
+      _top = MediaQuery.of(context).size.height + size * 4;
     });
     widget.rebuildParent(()=>SpellManager.reset());
   }
 
   @override
   void initState() {
-    _image = Image.asset('assets/images/hen.png', width: enemySize);
-    _timer = Timer.periodic(const Duration(milliseconds: 400), (_)=>_move());
-    _spellTimer = Timer.periodic(const Duration(seconds: 10), (_)=>_castSpell());
+    moveFrequency = 2000 ~/ SpellManager.enemySpeed;
+    spellFrequency = 50000 ~/ SpellManager.enemySpellCastingSpeed;
+    size = SpellManager.enemySize;
+    _image = Image.asset('assets/images/hen.png', width: size);
+    _timer = Timer.periodic(Duration(milliseconds: moveFrequency), (_)=>_move());
+    _spellTimer = Timer.periodic(Duration(milliseconds: spellFrequency), (_)=>_castSpell());
     super.initState();
   }
 
@@ -63,7 +68,7 @@ class _EnemyState extends State<Enemy> {
         AudioManager.playSpellCasted();
         SpellManager.spell = null;
         hitCount++;
-        _image = Image.asset('assets/images/hen$hitCount.png', width: enemySize);
+        _image = Image.asset('assets/images/hen$hitCount.png', width: size);
         if(hitCount==3){
           _die();
         }
@@ -81,7 +86,7 @@ class _EnemyState extends State<Enemy> {
     return AnimatedPositioned(
       top: _top,
       left: _left,
-      duration: const Duration(milliseconds: 400),
+      duration: Duration(milliseconds: moveFrequency),
       curve: Curves.easeInOut,
       child: GestureDetector(
         onTap: _hit,

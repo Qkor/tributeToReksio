@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ttr/managers/spell_manager.dart';
 import 'package:ttr/widgets/game_page.dart';
-
-import '../managers/assets_manager.dart';
-import '../managers/audio_manager.dart';
+import 'package:ttr/managers/assets_manager.dart';
+import 'package:ttr/managers/audio_manager.dart';
 
 class SettingsPage extends StatefulWidget{
   const SettingsPage({super.key});
@@ -58,6 +58,53 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               const SizedBox(height: 20),
               const Text('Chyba wiesz co robić. Powodzenia!'),
+              const SizedBox(height: 20),
+              const Text('Ustawienia:', style: TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 20),
+              const Text('Czułość, czyli jak dokładny musi być narysowany czar?'),
+              Slider(
+                value: SpellManager.spellSensitivity,
+                min: 0.5,
+                max: 0.95,
+                onChanged: (value){
+                  setState(() {
+                    SpellManager.spellSensitivity = value;
+                  });
+                }
+              ),
+              const Text('Szybkość poruszania się przeciwnika'),
+              Slider(
+                  value: SpellManager.enemySpeed,
+                  min: 1,
+                  max: 10,
+                  onChanged: (value){
+                    setState(() {
+                      SpellManager.enemySpeed = value;
+                    });
+                  }
+              ),
+              const Text('Szybkość rzucania czarów przez przeciwnika'),
+              Slider(
+                  value: SpellManager.enemySpellCastingSpeed,
+                  min: 1,
+                  max: 10,
+                  onChanged: (value){
+                    setState(() {
+                      SpellManager.enemySpellCastingSpeed = value;
+                    });
+                  }
+              ),
+              const Text('Rozmiar przeciwnika'),
+              Slider(
+                  value: SpellManager.enemySize,
+                  min: 50,
+                  max: 400,
+                  onChanged: (value){
+                    setState(() {
+                      SpellManager.enemySize = value;
+                    });
+                  }
+              ),
             ],
           ),
         ),
