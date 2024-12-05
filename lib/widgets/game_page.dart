@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:one_dollar_unistroke_recognizer/one_dollar_unistroke_recognizer.dart' as unistroke;
 import 'package:ttr/managers/audio_manager.dart';
 import 'package:ttr/widgets/enemy.dart';
@@ -28,6 +29,9 @@ class _GamePageState extends State<GamePage> {
     super.initState();
     AudioManager.playDuelMusic();
     SpellManager.reset();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+      SystemUiOverlay.bottom
+    ]);
   }
 
   @override
